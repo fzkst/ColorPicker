@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewRedNum;
     private TextView textViewGreenNum;
     private TextView textViewBlueNum;
-    private int seekRed;
-    private int seekGreen;
-    private int seekBlue;
+    private int red;
+    private int green;
+    private int blue;
     private int textProgress;
 
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         seekBarRed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                seekRed = progress;
+                red = progress;
                 textViewRedNum.setText(String.valueOf(progress));
                 Coloring();
             }
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         seekBarGreen.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                seekGreen = progress;
+                green = progress;
                 textViewGreenNum.setText(String.valueOf(progress));
                 Coloring();
             }
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         seekBarBlue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                seekBlue = progress;
+                blue = progress;
                 textViewBlueNum.setText(String.valueOf(progress));
                 Coloring();
             }
@@ -99,9 +99,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void Coloring(){
         screenBackground = (TextView) findViewById(R.id.textViewColor);
-        int color = Color.rgb(seekRed, seekGreen, seekBlue);
+        int color = Color.rgb(red, green, blue);
+        int rgbSum = red + green + blue;
         screenBackground.setBackgroundColor(color);
-
+        if (rgbSum > 400){
+            screenBackground.setTextColor(Color.BLACK);
+        } else {
+            screenBackground.setTextColor(Color.WHITE);
+        }
+        screenBackground.setText("(" + red + ", " + green + ", " + blue + ")");
     }
 
 
